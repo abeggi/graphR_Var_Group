@@ -1,6 +1,6 @@
 #### __Istruzioni__
 Il file Excel RVTools:
-Lasciate nel file **solo** il tab "vInfo", cancellando gli altri, e rinominate le colonne interessate **esattamente** con queste etichette:
+Il tab "vInfo" deve avere le colonne interessate **esattamente** con queste etichette:
 
 - VM  
 - Powerstate  

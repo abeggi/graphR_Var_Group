@@ -121,11 +121,6 @@ generate_plots <- function(df, raw_df, praefix = "comp"){
 
 generate_slides <- function(df, plot_list, top_VM, raw_df = NULL, praefix = "comp"){
   
-  if(!is.null(raw_df)){
-    data_prev <- get_stats_prevendita(raw_df)
-    slideTable(data_prev, "Riepilogo Risorse")
-  }
-
   if(praefix == "comp"){
     slidePlot(plot_list[[3]], "Distribution of vCPU for all VM's")
     slidePlot(plot_list[[4]], "Distribution of Memory for all VM's")

@@ -45,6 +45,8 @@ ui <- dashboardPage(
                               tabPanel("Istruzioni", includeMarkdown("instructions_rv.md")),
                               tabPanel("Report generato", 
                                        uiOutput("pdfview_rv")),
+                              tabPanel("VMs",
+                                       tableOutput("vms_table"))
                               # tabPanel("Instructions", includeMarkdown("instructions_rv.md"))
                             ),
                             plotOutput("progress_bar_rv", height = 1,width = 1)

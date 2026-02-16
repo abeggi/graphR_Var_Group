@@ -2,6 +2,8 @@ options(shiny.maxRequestSize=50*1024^2)
 
 server_rv <- function(input, output) {
   
+  vm_data <- reactiveValues(summary = NULL)
+  
   temp_dir <- file.path("www", "tmp")
   if (!dir.exists(temp_dir)) {
     dir.create(temp_dir, recursive = TRUE)
@@ -53,6 +55,8 @@ server_rv <- function(input, output) {
           }, error = function(err) { NULL })  
         }
         
+        vm_data$summary <- get_stats_prevendita(data_sub)
+        
         setProgress(0.3, message = "Performing Calculations")    
         
         data_comp <- get_stats(data_sub)
@@ -103,15 +107,16 @@ server_rv <- function(input, output) {
         if(length(dc_list) > 1){
           generate_overview_slide(data_overview)
         }
-        
-        generate_slides(data_comp, plot_comp, top_VM_comp, data_sub)
-        
-        if(length(dc_list) > 1){
-          for(i in 1:length(dc_list)){
-            generate_slides(data_list[[i]], plot_dc[[i]], top_VM_list[[i]], data_sub[data_sub$Datacenter == dc_list[i], ], dc_list[i])
-          }
-        }
-        
+
+        # Riepilogo risorse (page 2 in simple cases) with thousands separator
+        data_prev <- get_stats_prevendita(data_sub)
+        num_cols_prev <- sapply(data_prev, is.numeric)
+        data_prev[num_cols_prev] <- lapply(data_prev[num_cols_prev], function(x) {
+          format(x, big.mark = ".", decimal.mark = ",", scientific = FALSE)
+        })
+        slideTable(data_prev, "Riepilogo Risorse")
+
+        # Host overview moved immediately after riepilogo
         if(!is.null(overview_host)){
           j <- ceiling(nrow(host_sub)/6)
           for(i in 1:j){
@@ -120,6 +125,14 @@ server_rv <- function(input, output) {
             slideTable(host_sub[a:b,], "Host overview")
           }
           slideTable(host_summary, "Details")
+        }
+
+        generate_slides(data_comp, plot_comp, top_VM_comp, data_sub)
+        
+        if(length(dc_list) > 1){
+          for(i in 1:length(dc_list)){
+            generate_slides(data_list[[i]], plot_dc[[i]], top_VM_list[[i]], data_sub[data_sub$Datacenter == dc_list[i], ], dc_list[i])
+          }
         }
         
         slideLast()
@@ -138,5 +151,15 @@ server_rv <- function(input, output) {
       shinyjs::hide("progress_bar_rv")
       shinyjs::show("pdfview_rv")
     }) 
+  })
+
+  output$vms_table <- renderTable({
+    req(vm_data$summary)
+    df <- vm_data$summary
+    num_cols <- sapply(df, is.numeric)
+    df[num_cols] <- lapply(df[num_cols], function(x) {
+      format(x, big.mark = ".", decimal.mark = ",", scientific = FALSE)
+    })
+    df
   })
 }
