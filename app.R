@@ -5,7 +5,7 @@ source("server_rv.R")
 
 ui <- dashboardPage(
   dashboardHeader(title = "graphR. Var Group"),
-  dashboardSidebar(
+  dashboardSidebar(collapsed = TRUE,
     sidebarMenu(
       menuItem("RV Tools", tabName = "tab_rv", icon = icon("th-list"))
     )
