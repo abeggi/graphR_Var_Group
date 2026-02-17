@@ -9,10 +9,10 @@ Questo progetto migra un'installazione locale di R/Shiny verso un'architettura a
 ## 🛠️ Stack Tecnologico
 * **Linguaggio:** R (v4.3.0)
 * **Framework:** Shiny & ShinyDashboard
-* **Infrastruttura:** Docker / Proxmox LXC
-* **Networking:** Tailscale + Nginx Proxy Manager (NPM)
+* **Infrastruttura:** Docker
 
-## 📦 Installazione Rapida
+
+## 📦 Installazione Rapida con Docker
 
 Per avviare l'applicazione senza dover configurare l'ambiente R locale:
 
@@ -22,3 +22,30 @@ docker run -d \
   -p 8080:3838 \
   --restart unless-stopped \
   abeggi/graphr-vg:latest
+```
+
+Oppure usare Docker Compose
+'''services:
+  graphr-app:
+    image: abeggi/graphr-vg:latest
+    container_name: graphr_app
+    restart: unless-stopped
+    ports:
+      - "8080:3838"
+    environment:
+      - TZ=Europe/Rome
+    # Se in futuro vorrai mappare i dati esternamente per non ricostruire l'immagine
+    # ad ogni cambio di CSV o file Excel, decommenta le righe sotto:
+    # volumes:
+    #   - ./data:/srv/shiny-server/graphr/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  default:
+    name: graphr_network
+'''
+
