@@ -26,7 +26,7 @@ docker run -d \
 
 Oppure usare Docker Compose
 
-```yaml
+```bash
 services:
   graphr-app:
     image: abeggi/graphr-vg:latest
@@ -50,4 +50,5 @@ networks:
   default:
     name: graphr_network
 ```
+
 
