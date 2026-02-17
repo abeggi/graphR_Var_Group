@@ -1,6 +1,6 @@
 <br>  
  
-*V. beta 0.5*
+*V. beta 17.02.26*
 
 #### __Istruzioni__
 Il file Excel RVTools:

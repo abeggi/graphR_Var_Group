@@ -7,7 +7,7 @@ ui <- dashboardPage(
   dashboardHeader(title = "graphR. Var Group"),
   dashboardSidebar(collapsed = TRUE,
     sidebarMenu(
-      menuItem("RV Tools", tabName = "tab_rv", icon = icon("th-list"))
+      menuItem("RVTools", tabName = "tab_rv", icon = icon("th-list"))
     )
   ),
   ## Body content
@@ -17,7 +17,13 @@ ui <- dashboardPage(
       tabItem(tabName = "tab_rv",
               fluidPage(theme = "custom.css",
                         # Application title.
-                        titlePanel("RV Tools Var Group"),
+                        # titlePanel("RV Tools Var Group"),
+                        titlePanel(
+                          tagList(
+                            tags$img(src = "logo-vg.png", height = "50px", style = "margin-right: 15px; vertical-align: middle;"),
+                            span("Analizzatore RVTools VMware", style = "vertical-align: middle;")
+                                 )
+                                  ), 
                         shinyjs::useShinyjs(),
                         
                         sidebarLayout(
