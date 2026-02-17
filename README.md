@@ -9,7 +9,7 @@ Applicazione Shiny per la visualizzazione e l'analisi dei dati di GraphR.
 * **Infrastruttura:** Docker
 
 
-## 📦 Installazione Rapida con Docker
+## 📦 Installazione con docker run
 
 Per avviare l'applicazione senza dover configurare l'ambiente R locale:
 
