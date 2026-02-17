@@ -25,7 +25,9 @@ docker run -d \
 ```
 
 Oppure usare Docker Compose
-'''services:
+
+```yaml
+services:
   graphr-app:
     image: abeggi/graphr-vg:latest
     container_name: graphr_app
@@ -47,5 +49,5 @@ Oppure usare Docker Compose
 networks:
   default:
     name: graphr_network
-'''
+```
 
