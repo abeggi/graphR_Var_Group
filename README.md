@@ -1,4 +1,4 @@
-# GraphR-VG: analizzatore RVTools VMware
+# graphR-VG: analizzatore RVTools VMware
 (basato su: https://github.com/smichard/graphR)
 
 Applicazione Shiny per la visualizzazione e l'analisi dei dati di GraphR.
