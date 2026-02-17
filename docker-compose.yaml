@@ -1,0 +1,20 @@
+services:
+  graphr-app:
+    image: abeggi/graphr-vg:latest
+    container_name: graphr_app
+    restart: unless-stopped
+    ports:
+      - "8080:3838"
+    environment:
+      - TZ=Europe/Rome
+    # Opzionale: mappare i dati esternamente.
+    # volumes:
+    #   - ./data:/srv/shiny-server/graphr/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+networks:
+  default:
+    name: graphr_network
