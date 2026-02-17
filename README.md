@@ -11,6 +11,8 @@ Applicazione Shiny per la visualizzazione e l'analisi dei dati di GraphR.
 
 ## 📦 Installazione con docker
 
+Il container non ha volumi o bind persistenti perché non c'è nulla da salvare o configurazioni da modificare: il report può essere scaricato dopo la creazione.
+
 Per avviare l'applicazione senza dover configurare l'ambiente R locale:
 
 ```bash
@@ -20,6 +22,8 @@ docker run -d \
   --restart unless-stopped \
   abeggi/graphr-vg:latest
 ```
+e lanciare con http://localhost:8080 oppure http://ip-del-server:8080
+
 
 Oppure usare Docker Compose
 
@@ -45,7 +49,7 @@ networks:
   default:
     name: graphr_network
 ```
-
+e lanciare con http://localhost:8080 oppure http://ip-del-server:808
 
 ## Autore
 Andrea Beggi - Var Group  
